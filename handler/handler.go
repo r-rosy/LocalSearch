@@ -27,6 +27,8 @@ func Add(c *gin.Context) {
 
 func Sea(c *gin.Context) {
 	host:=c.Query("host")
+	guest:=c.Query("guest")
+	guest=guest
 	guests,err:=model.Sea(host)
 	if err!=nil {
 		c.JSON(400, model.Response{
