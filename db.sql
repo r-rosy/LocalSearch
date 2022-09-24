@@ -7,8 +7,8 @@ use `local_search`;
 -- map
 create table `maps`(
    `id` int not null AUTO_INCREMENT comment "id" ,
-   'host' varchar(20) null comment "主",
-   'guest' varchar(20) null comment "客",
+   'host' varchar(20) null,
+   'guest' varchar(20) null ,
 
 -- 添加约束
 primary key (`id`)
