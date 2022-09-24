@@ -20,9 +20,9 @@ func LoadRouters(r *gin.Engine) {
 
 	userrouter := r.Group("/api/v1/map")
 	{
-		userrouter.POST("/",handler.Add )
-		userrouter.GET("/",handler.Sea)
-		userrouter.DELETE("/", handler.Del)
+		userrouter.POST("",handler.Add )
+		userrouter.GET("",handler.Sea)
+		userrouter.DELETE("", handler.Del)
 	}
 
 }
