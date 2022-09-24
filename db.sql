@@ -11,5 +11,5 @@ create table `maps`(
    `guest` varchar(20) null,
 
 -- 添加约束
-primary key (`id`),
+primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
