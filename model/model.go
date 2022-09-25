@@ -48,7 +48,7 @@ func DelHost(host string) error {
 	return nil
 }
 
-func Sea(host string) ([]string, error) {
+func Sea(host string) ([]map[string]interface{}, error) {
 	var maps []Maps
 	query := fmt.Sprintf("%s = ?", "host")
 	err := MysqlDb.Db.Where(query, host).Find(&maps).Error
@@ -56,9 +56,9 @@ func Sea(host string) ([]string, error) {
 		return nil, err
 	}
 
-	var result []string
+	var result []map[string]interface{}
 	for _, Map := range maps {
-		result = append(result, Map.Guest)
+		result = append(result, map[string]interface{}{"data": Map.Guest, "id": Map.Id})
 	}
 	return result, nil
 }
