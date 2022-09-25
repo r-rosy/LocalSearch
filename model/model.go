@@ -13,8 +13,10 @@ type Maps struct {
 }
 
 func Add(host string, guest string) error {
-	query := fmt.Sprintf("%s = ?", "host")
-	if MysqlDb.Db.Where(query, host).First(&test); test.Host != "" {
+	test = Maps{}
+	query1 := fmt.Sprintf("%s = ?", "host")
+	query2 := fmt.Sprintf("%s = ?", "guest")
+	if MysqlDb.Db.Where(query1, host).Where(query2, guest).First(&test); test.Id != 0 {
 		return fmt.Errorf("Aleardy_Exited")
 	}
 
@@ -25,7 +27,13 @@ func Add(host string, guest string) error {
 }
 
 func DelGuest(id int) error {
+	test = Maps{}
 	query := fmt.Sprintf("%s = ?", "id")
+
+	if MysqlDb.Db.Where(query, id).First(&test); test.Host == "" {
+		return fmt.Errorf("NotExisted")
+	}
+
 	err := MysqlDb.Db.Where(query, id).Delete(&Maps{}).Error
 	if err != nil {
 		return err
@@ -35,6 +43,7 @@ func DelGuest(id int) error {
 }
 
 func DelHost(host string) error {
+	test = Maps{}
 	query := fmt.Sprintf("%s = ?", "host")
 	if MysqlDb.Db.Where(query, host).First(&test); test.Host == "" {
 		return fmt.Errorf("NotExisted")
