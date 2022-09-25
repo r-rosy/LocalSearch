@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+var test Maps
+
 type Maps struct {
 	Id    int    `json:"id" gorm:"column:id"`
 	Host  string `json:"host" gorm:"column:host"`
@@ -12,7 +14,7 @@ type Maps struct {
 
 func Add(host string, guest string) error {
 	query := fmt.Sprintf("%s = ?", "host")
-	if err := MysqlDb.Db.Where(query, host).Error; err == nil {
+	if MysqlDb.Db.Where(query, host).First(&test); test.Host != "" {
 		return fmt.Errorf("Aleardy_Exited")
 	}
 
@@ -34,12 +36,11 @@ func DelGuest(id int) error {
 
 func DelHost(host string) error {
 	query := fmt.Sprintf("%s = ?", "host")
-	err := MysqlDb.Db.Where(query, host).Error
-	if err != nil {
+	if MysqlDb.Db.Where(query, host).First(&test); test.Host == "" {
 		return fmt.Errorf("NotExisted")
 	}
 
-	err = MysqlDb.Db.Where(query, host).Delete(&Maps{}).Error
+	err := MysqlDb.Db.Where(query, host).Delete(&Maps{}).Error
 	if err != nil {
 		return err
 	}
