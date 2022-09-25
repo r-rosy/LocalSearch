@@ -28,20 +28,20 @@ func Add(c *gin.Context) {
 
 func Sea(c *gin.Context) {
 	host := c.Query("host")
-	guests, err := model.Sea(host)
-	guests = guests
-	if err != nil {
+	//guests, err := model.Sea(host)
+	//guests = guests
+/*	if err != nil {
 		c.JSON(400, model.Response{
 			Code:    400,
 			Message: "Failed",
 			Data:    err,
 		})
 		return
-	}
+	}*/
 	c.JSON(200, model.Response{
 		Code:    200,
 		Message: "ok",
-		Data:    nil,
+		Data:    host,
 	})
 }
 
