@@ -43,7 +43,7 @@ func DelHost(host string) error {
 func Sea(host string) ([]string, error) {
 	var maps []Maps
 	query := fmt.Sprintf("%s = ?", "host")
-	err := MysqlDb.Db.Where(query, host).Find(maps).Error
+	err := MysqlDb.Db.Where(query, host).Find(&maps).Error
 	if err != nil {
 		return nil, err
 	}
